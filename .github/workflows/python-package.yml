@@ -29,3 +29,9 @@ jobs:
       - name: Run tests
         run: pytest
 
+      - name: Notify success/failure
+        if: failure()
+        run: |
+          echo "Sending failure notification to email"
+          curl -X POST -H "Content-Type: application/json" --data '{"text": "Test failed!"}' https://example.com/send-notification
+
